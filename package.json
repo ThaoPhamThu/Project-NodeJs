@@ -1,0 +1,26 @@
+{
+  "name": "refull",
+  "version": "1.0.0",
+  "description": "project ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ThaoPhamThu/ResfullAPI-NodeJs.git).git"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "Pham Thu Thao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThaoPhamThu/ResfullAPI-NodeJs.git)/issues"
+  },
+  "homepage": "https://github.com/ThaoPhamThu/ResfullAPI-NodeJs.git)#readme",
+  "dependencies": {
+    "express": "4.18.2"
+  }
+}
