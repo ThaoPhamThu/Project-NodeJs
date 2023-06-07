@@ -7,17 +7,32 @@ const getAllUsers = async () => {
     return results;
 }
 
-const postNewUser = async () => {
-    // let email = req.body.email;
-    // let name = req.body.name;
-    // let city = req.body.city;
+const postNewUser = async (email, name, city) => {
+    let [results, fields] = await connection.query(
+        ` INSERT INTO Users(email, name, city) VALUES(?,?,?) `, [email, name, city]);
 
-    // let [results, fields] = await connection.query(
-    //     ` INSERT INTO Users(email, name, city) VALUES(?,?,?) `, [email, name, city]);
+}
 
+const getUserById = async (id) => {
+    let [results, fields] = await connection.query(
+        `select * from Users where id= ?`,
+        [id]
+    );
+
+    let user = results && results.length > 0 ? results[0] : {};
+    return user;
+}
+
+const updateUserById = async (email, name, city, id) => {
+    let [results, fields] = await connection.query(
+        `UPDATE Users SET email =?, name =?, city =? WHERE id=?`,
+        [email, name, city, id]
+    );
 }
 
 module.exports = {
     getAllUsers,
-    postNewUser
+    postNewUser,
+    getUserById,
+    updateUserById
 }
