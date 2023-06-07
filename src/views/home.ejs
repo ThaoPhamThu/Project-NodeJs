@@ -44,7 +44,9 @@
                     </td>
                     <td>
                         <a href="/update-user/<%= listUsers[i].id %>">Edit</a>
-                        <button>Delete</button>
+                        <form action="/delete-user/<%= listUsers[i].id %>" method="POST">
+                            <button>Delete</button>
+                        </form>
                     </td>
                 </tr>
                 <% } %>
