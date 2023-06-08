@@ -17,6 +17,11 @@ configViewEngine(app);
 //Khai bao route
 app.use('/', webRoutes);
 
-app.listen(port, () => {
-    console.log(`On port ${port}`);
-});
+(async () => {
+    // test connection
+    await connection();
+    app.listen(port, () => {
+        console.log(`On port ${port}`);
+    });
+})();
+
