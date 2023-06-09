@@ -1,6 +1,6 @@
 const connection = require('../config/database');
 const User = require('../models/user');
-const { use } = require('../routes/web');
+// const { use } = require('../routes/web');
 const { uploadSingleFile, uploadMultiFiles } = require('../services/filesService');
 
 const getUsersAPI = async (req, res) => {
