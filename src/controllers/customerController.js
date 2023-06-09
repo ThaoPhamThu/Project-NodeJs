@@ -1,4 +1,4 @@
-const { createCustomerAPI, createArrCustomersAPI } = require('../services/customerService')
+const { createCustomerAPI, createArrCustomersAPI, displayCustomersAPI, getACustomerAPI, updateCustomerAPI, deleteCustomer, deleteArrCustomers } = require('../services/customerService')
 const { uploadSingleFile, uploadMultiFiles } = require('../services/filesService')
 
 module.exports = {
@@ -47,4 +47,47 @@ module.exports = {
         }
 
     },
+
+    getCustomersAPI: async (req, res) => {
+        let customers = await displayCustomersAPI();
+        return res.status(200).json({
+            errCode: 0,
+            data: customers
+        })
+    },
+
+    putCustomerAPI: async (req, res) => {
+        // let id = req.body.id;
+        // let customerData = await getACustomerAPI(id);
+        let customerData = {
+            id: req.body.id,
+            name: req.body.name,
+            email: req.body.email,
+            address: req.body.address
+        }
+        let result = await updateCustomerAPI(customerData);
+        return res.status(200).json({
+            errCode: 0,
+            data: result
+        })
+    },
+
+    deleteCustomerAPI: async (req, res) => {
+        let id = req.body.id;
+        let result = await deleteCustomer(id);
+        return res.status(200).json({
+            errCode: 0,
+            data: result
+        })
+    },
+
+    deleteArrCustomersAPI: async (req, res) => {
+        let arrId = req.body.customersId;
+        let results = await deleteArrCustomers(arrId);
+        return res.status(200).json({
+            errCode: 0,
+            data: results
+        })
+
+    }
 }

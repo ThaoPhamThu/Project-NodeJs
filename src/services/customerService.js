@@ -26,5 +26,53 @@ module.exports = {
             console.log(error);
             return null;
         }
+    },
+
+    displayCustomersAPI: async () => {
+        try {
+            let results = Customer.find({});
+            return results;
+        } catch (error) {
+            return null;
+        }
+    },
+
+    getACustomerAPI: async (id) => {
+        try {
+            let result = await Customer.findById(id);
+            return result;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    },
+
+    updateCustomerAPI: async (customerData) => {
+        try {
+            let result = await Customer.updateOne({ _id: customerData.id }, { name: customerData.name, email: customerData.email, address: customerData.address });
+            return result;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    },
+
+    deleteCustomer: async (id) => {
+        try {
+            let result = await Customer.deleteById(id); // deleteById () trong soft delete
+            return result;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    },
+
+    deleteArrCustomers: async (arrId) => {
+        try {
+            let result = await Customer.delete({ _id: { $in: arrId } }); // delete() trong soft delete
+            return result;
+        } catch (error) {
+            return null;
+        }
     }
 }
