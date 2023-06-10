@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/ThaoPhamThu/ResfullAPI-NodeJs.git)#readme",
   "dependencies": {
+    "api-query-params": "5.4.0",
     "dotenv": "16.1.4",
     "ejs": "3.1.9",
     "express": "4.18.2",

@@ -52,7 +52,7 @@ module.exports = {
         let { limit, page } = req.query;
         let customer = "";
         if (limit && page) {
-            customers = await displayCustomersAPI(limit, page);
+            customers = await displayCustomersAPI(limit, page, req.query);
         } else {
             customers = await displayCustomersAPI();
         }
