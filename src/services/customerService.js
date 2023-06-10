@@ -28,9 +28,16 @@ module.exports = {
         }
     },
 
-    displayCustomersAPI: async () => {
+    displayCustomersAPI: async (limit, page) => {
         try {
-            let results = Customer.find({});
+            let results = "";
+            if (limit && page) {
+                let skip = (page - 1) * limit;
+                results = Customer.find({}).skip(skip).limit(limit).exec();
+
+            } else {
+                results = Customer.find({});
+            }
             return results;
         } catch (error) {
             return null;
