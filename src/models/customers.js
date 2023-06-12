@@ -10,7 +10,7 @@ const customerSchema = new mongoose.Schema(
             required: true
         },
         address: String,
-        phone: Number,
+        phone: String,
         description: String,
         image: String,
     },

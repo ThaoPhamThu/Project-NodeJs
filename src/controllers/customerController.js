@@ -1,33 +1,53 @@
 const { createCustomerAPI, createArrCustomersAPI, displayCustomersAPI, getACustomerAPI, updateCustomerAPI, deleteCustomer, deleteArrCustomers } = require('../services/customerService')
-const { uploadSingleFile, uploadMultiFiles } = require('../services/filesService')
+const { uploadSingleFile, uploadMultiFiles } = require('../services/filesService');
+const Joi = require('joi');
 
 module.exports = {
     postCustomerAPI: async (req, res) => {
         let { email, address, phone, name, description } = req.body;
 
-        let imageURL = "";
-
-        if (!req.files || Object.keys(req.files).length === 0) {
-            //do nothing
+        const schema = Joi.object({
+            name: Joi.string()
+                .alphanum()
+                .min(3)
+                .max(30)
+                .required(),
+            address: Joi.string(),
+            phone: Joi.string()
+                .pattern(new RegExp('^[0-9]{8,11}$')),
+            description: Joi.string(),
+            email: Joi.string().email()
+        });
+        const { error } = schema.validate(req.body);
+        if (error) {
+            // return error
         } else {
-            let result = await uploadSingleFile(req.files.image);
-            imageURL = result.path;
-        };
+            let imageURL = "";
 
-        let customerData = {
-            email,
-            address,
-            phone, name,
-            description,
-            image: imageURL
+            if (!req.files || Object.keys(req.files).length === 0) {
+                //do nothing
+            } else {
+                let result = await uploadSingleFile(req.files.image);
+                imageURL = result.path;
+            };
+
+            let customerData = {
+                email,
+                address,
+                phone, name,
+                description,
+                image: imageURL
+            }
+
+            let customer = await createCustomerAPI(customerData);
+
+            return res.status(200).json({
+                errCode: 0,
+                data: customer
+            })
+
         }
 
-        let customer = await createCustomerAPI(customerData);
-
-        return res.status(200).json({
-            errCode: 0,
-            data: customer
-        })
 
     },
 
